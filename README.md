@@ -264,10 +264,9 @@ Charts update in real-time as tasks are created, moved, or deleted, providing in
 
 ### Port Already in Use
 ```bash
-# Kill process on port 3001 (backend)
 lsof -ti:3001 | xargs kill -9
 
-# Kill process on port 5173 (frontend)
+
 lsof -ti:5173 | xargs kill -9
 ```
 
@@ -298,6 +297,8 @@ lsof -ti:5173 | xargs kill -9
 This project is open source and available under the MIT License.
 
 ## 👨‍💻 Author
+###  Name : Harshit
+###  Email : harshit.2327cseai120@kiet.edu
 
 Created as a technical assessment project demonstrating full-stack development, real-time communication, and comprehensive testing practices.
 
