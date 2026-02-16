@@ -5,7 +5,7 @@ import './TaskProgressChart.css';
 const COLORS = ['#2196f3', '#ff9800', '#4caf50'];
 
 const TaskProgressChart = ({ tasks }) => {
-  // Calculate task statistics
+
   const todoCount = tasks.filter(t => t.column === 'todo').length;
   const inProgressCount = tasks.filter(t => t.column === 'inprogress').length;
   const doneCount = tasks.filter(t => t.column === 'done').length;

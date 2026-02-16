@@ -30,7 +30,6 @@ const KanbanBoard = () => {
     category: 'feature'
   });
 
-  // Initialize WebSocket connection
   useEffect(() => {
     const newSocket = io(SOCKET_URL);
     setSocket(newSocket);
@@ -113,7 +112,6 @@ const KanbanBoard = () => {
     const file = event.target.files[0];
     if (!file) return;
 
-    // Simulate file upload - in production, upload to server
     const reader = new FileReader();
     reader.onloadend = () => {
       const task = tasks.find(t => t.id === taskId);
