@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://websocket-kanban-vitest-playwright-beryl.vercel.app",
     methods: ["GET", "POST"]
   }
 });
