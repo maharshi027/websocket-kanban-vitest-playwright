@@ -120,7 +120,7 @@ Works on desktop, tablet, and mobile devices.
 WebSocket connection is configured in `KanbanBoard.jsx`:
 
 ```javascript
-const SOCKET_URL = 'http://localhost:3001';
+const SOCKET_URL = 'https://websocket-kanban-vitest-playwright-1.onrender.com/';
 ```
 
 Update this URL for production deployment.

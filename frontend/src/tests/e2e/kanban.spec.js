@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Kanban Board E2E Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    // Wait for the board to load
+
     await page.waitForSelector('.kanban-board', { timeout: 10000 });
   });
 
@@ -17,7 +17,6 @@ test.describe('Kanban Board E2E Tests', () => {
     const statusIndicator = page.locator('.status-indicator');
     await expect(statusIndicator).toBeVisible();
     
-    // Should show connected or disconnected status
     const statusText = await statusIndicator.textContent();
     expect(statusText).toMatch(/(Connected|Disconnected)/);
   });
@@ -34,17 +33,17 @@ test.describe('Kanban Board E2E Tests', () => {
   });
 
   test('should create a new task', async ({ page }) => {
-    // Open modal
+   
     await page.click('text=Add Task');
     
-    // Fill form
+ 
     await page.fill('input[placeholder="Task title"]', 'E2E Test Task');
     await page.fill('textarea[placeholder="Task description"]', 'This is a test task created by Playwright');
     
-    // Submit form
+
     await page.click('button:has-text("Add Task"):not(:has-text("Add Task "))');
     
-    // Verify task was created
+
     await expect(page.locator('text=E2E Test Task')).toBeVisible({ timeout: 5000 });
   });
 
@@ -59,11 +58,11 @@ test.describe('Kanban Board E2E Tests', () => {
   test('should display task count badges', async ({ page }) => {
     const countBadges = page.locator('.task-count');
     const count = await countBadges.count();
-    expect(count).toBeGreaterThanOrEqual(3); // At least 3 columns
+    expect(count).toBeGreaterThanOrEqual(3);
   });
 
   test('should display sample tasks', async ({ page }) => {
-    // Wait for tasks to load
+
     await page.waitForSelector('.task-card', { timeout: 5000 });
     
     const taskCards = page.locator('.task-card');
@@ -79,20 +78,19 @@ test.describe('Task Management E2E Tests', () => {
   });
 
   test('should delete a task', async ({ page }) => {
-    // Wait for tasks to load
+
     await page.waitForSelector('.task-card', { timeout: 5000 });
     
-    // Get initial task count
+  
     const initialCount = await page.locator('.task-card').count();
-    
-    // Delete first task
+  
     const deleteButton = page.locator('.btn-icon').first();
     await deleteButton.click();
     
-    // Wait a bit for the task to be removed
+   
     await page.waitForTimeout(500);
     
-    // Verify task was deleted
+  
     const newCount = await page.locator('.task-card').count();
     expect(newCount).toBe(initialCount - 1);
   });
@@ -100,28 +98,24 @@ test.describe('Task Management E2E Tests', () => {
   test('should change task priority', async ({ page }) => {
     await page.waitForSelector('.task-card', { timeout: 5000 });
     
-    // Find first priority dropdown
     const prioritySelect = page.locator('.priority-badge').first();
     await prioritySelect.click();
     
-    // Select a different priority
+ 
     await prioritySelect.selectOption('high');
     
-    // Verify priority was changed
+
     await expect(prioritySelect).toHaveValue('high');
   });
 
   test('should change task category', async ({ page }) => {
     await page.waitForSelector('.task-card', { timeout: 5000 });
     
-    // Find first category dropdown
     const categorySelect = page.locator('.category-badge').first();
     await categorySelect.click();
     
-    // Select a different category
     await categorySelect.selectOption('bug');
-    
-    // Verify category was changed
+ 
     await expect(categorySelect).toHaveValue('bug');
   });
 });
@@ -163,7 +157,7 @@ test.describe('Chart Visualization E2E Tests', () => {
   test('should show chart containers', async ({ page }) => {
     const chartWrappers = page.locator('.chart-wrapper');
     const count = await chartWrappers.count();
-    expect(count).toBeGreaterThanOrEqual(2); // At least 2 charts
+    expect(count).toBeGreaterThanOrEqual(2);
   });
 });
 

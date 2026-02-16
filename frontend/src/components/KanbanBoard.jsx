@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import TaskProgressChart from './TaskProgressChart';
 import './KanbanBoard.css';
 
-const SOCKET_URL = 'http://localhost:3001';
+const SOCKET_URL = 'https://websocket-kanban-vitest-playwright-1.onrender.com';
 
 const COLUMNS = {
   todo: { id: 'todo', title: 'To Do', color: '#e3f2fd' },

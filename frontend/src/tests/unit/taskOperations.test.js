@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 
-// Mock task operations
 const createTask = (title, description, column = 'todo', priority = 'medium', category = 'feature') => {
   return {
     id: Math.random().toString(36).substr(2, 9),

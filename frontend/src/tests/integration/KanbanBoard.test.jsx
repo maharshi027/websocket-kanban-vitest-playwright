@@ -3,7 +3,6 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import KanbanBoard from '../../components/KanbanBoard';
 
-// Mock socket.io-client
 vi.mock('socket.io-client', () => {
   const mockSocket = {
     on: vi.fn(),
@@ -81,7 +80,7 @@ describe('KanbanBoard Integration Tests', () => {
       expect(screen.getByText(/Add Task/)).toBeInTheDocument();
     });
 
-    // Open modal
+  
     const addButton = screen.getByText(/Add Task/);
     await user.click(addButton);
     
@@ -89,7 +88,6 @@ describe('KanbanBoard Integration Tests', () => {
       expect(screen.getByText('Add New Task')).toBeInTheDocument();
     });
 
-    // Close modal
     const cancelButton = screen.getByText('Cancel');
     await user.click(cancelButton);
     
