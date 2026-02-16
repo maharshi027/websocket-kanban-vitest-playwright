@@ -16,7 +16,6 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(express.json());
 
-// In-memory task storage
 let tasks = [
   {
     id: uuidv4(),
@@ -50,14 +49,11 @@ let tasks = [
   }
 ];
 
-// WebSocket connection handling
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
 
-  // Send all tasks to newly connected client
   socket.emit('sync:tasks', tasks);
 
-  // Handle task creation
   socket.on('task:create', (taskData) => {
     const newTask = {
       id: uuidv4(),
@@ -75,7 +71,6 @@ io.on('connection', (socket) => {
     console.log('Task created:', newTask.id);
   });
 
-  // Handle task update
   socket.on('task:update', (taskData) => {
     const taskIndex = tasks.findIndex(t => t.id === taskData.id);
     
@@ -92,7 +87,6 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Handle task move between columns
   socket.on('task:move', (data) => {
     const { taskId, newColumn } = data;
     const taskIndex = tasks.findIndex(t => t.id === taskId);
@@ -107,7 +101,6 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Handle task deletion
   socket.on('task:delete', (taskId) => {
     const taskIndex = tasks.findIndex(t => t.id === taskId);
     
@@ -120,18 +113,15 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Handle disconnection
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
   });
 });
 
-// REST endpoint to get all tasks (optional, for testing)
 app.get('/api/tasks', (req, res) => {
   res.json(tasks);
 });
 
-// Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', tasksCount: tasks.length });
 });
